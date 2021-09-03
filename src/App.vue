@@ -1,27 +1,33 @@
 <template>
   <div id="app">
 		<div class="container page">
-			<table class="table">
-				<thead>
-				<tr>
-					<th scope="col">#</th>
-					<th scope="col">Деталь</th>
-					<th scope="col">Цена</th>
-					<th scope="col">Количество</th>
-					<th scope="col">Стоимость</th>
-					<th scope="col">Действия</th>
-				</tr>
-				</thead>
-				<tbody>
-				<template v-for="rows of getListTable">
-					<TRComponent
-						:rows="rows"
-						:key="rows.id"
-					>
-					</TRComponent>
-				</template>
-				</tbody>
-			</table>
+			<ul class="list-group">
+				<li class="list-group-item header">
+					<div class="list-group__id">
+						<strong>#</strong>
+					</div>
+					<div class="list-group__title">
+						<strong>Деталь</strong>
+					</div>
+					<div class="list-group__price">
+						<strong>Цена</strong>
+					</div>
+					<div class="list-group__count">
+						<strong>Количество</strong>
+					</div>
+					<div class="list-group__cost">
+						<strong>Стоимость</strong>
+					</div>
+					<div class="list-group__actions">
+						<strong>Действия</strong>
+					</div>
+				</li>
+				<TRComponent
+					v-for="row in getListTable"
+					:rows="row"
+					:key="row.id"
+				/>
+			</ul>
 		</div>
   </div>
 </template>
@@ -41,9 +47,3 @@ export default {
 	}
 }
 </script>
-
-<style>
-.page {
-	margin-top: 2rem;
-}
-</style>

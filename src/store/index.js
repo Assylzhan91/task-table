@@ -60,7 +60,7 @@ export default new Vuex.Store({
             title: 'Поршни',
             price: 10_000,
             count: 5,
-            children: []
+            children: null
           },
           {
             id: 22,

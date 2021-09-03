@@ -1,0 +1,44 @@
+html {
+	font-size: 10px;
+}
+
+body {
+	margin: 0;
+	padding: 0;
+	font-family: “Helvetica Neue”,Helvetica,Arial,sans-serif;
+&.anchor {
+	 overflow: hidden;
+ }
+}
+* {
+	box-sizing: border-box;
+}
+
+ul {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+}
+.container {
+	max-width: 1160px;
+	width: 100%;
+	margin: auto;
+	padding-left: 3rem;
+	padding-right: 3rem;
+}
+
+
+button {
+	border: 0;
+	background: transparent;
+	margin: 0;
+	padding: 0;
+}
+
+.d-flex {
+	display: flex;
+}
+
+.page {
+	margin-top: 4rem;
+}

@@ -1,0 +1,26 @@
+table {
+	width: 100%;
+}
+table td {
+	padding: 0 !important;
+}
+
+
+
+.list-group{
+	&-item,
+	&__buttons {
+		display: flex;
+		justify-content: space-between;
+	}
+
+	&-item > div{
+		flex-grow: 1;
+		flex-basis: (100% / 6);
+	}
+
+	&.header{
+		font-weight: bolder;
+	}
+
+}

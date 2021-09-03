@@ -1,28 +1,39 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+		<div class="container">
+			<table class="table">
+				<thead>
+				<tr>
+					<th scope="col">Деталь</th>
+					<th scope="col">Цена</th>
+					<th scope="col">Количество</th>
+					<th scope="col">Стоимость</th>
+					<th scope="col">Действия</th>
+				</tr>
+				</thead>
+				<tbody>
+				<TRComponent
+
+				/>
+				{{ getListTable }}
+				</tbody>
+			</table>
+		</div>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+import TRComponent from './components/TRComponent.vue'
+import { mapGetters } from 'vuex'
 export default {
   name: 'App',
   components: {
-    HelloWorld
-  }
+    TRComponent,
+  },
+	computed: {
+    ...mapGetters([
+      'getListTable'
+		])
+	}
 }
 </script>
-
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>

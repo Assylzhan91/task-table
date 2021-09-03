@@ -1,9 +1,10 @@
 <template>
   <div id="app">
-		<div class="container">
+		<div class="container page">
 			<table class="table">
 				<thead>
 				<tr>
+					<th scope="col">#</th>
 					<th scope="col">Деталь</th>
 					<th scope="col">Цена</th>
 					<th scope="col">Количество</th>
@@ -12,10 +13,13 @@
 				</tr>
 				</thead>
 				<tbody>
-				<TRComponent
-
-				/>
-				{{ getListTable }}
+				<template v-for="rows of getListTable">
+					<TRComponent
+						:rows="rows"
+						:key="rows.id"
+					>
+					</TRComponent>
+				</template>
 				</tbody>
 			</table>
 		</div>
@@ -37,3 +41,9 @@ export default {
 	}
 }
 </script>
+
+<style>
+.page {
+	margin-top: 2rem;
+}
+</style>

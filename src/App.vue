@@ -1,49 +1,40 @@
 <template>
   <div id="app">
 		<div class="container page">
-			<ul class="list-group">
-				<li class="list-group-item header">
-					<div class="list-group__id">
-						<strong>#</strong>
-					</div>
-					<div class="list-group__title">
-						<strong>Деталь</strong>
-					</div>
-					<div class="list-group__price">
-						<strong>Цена</strong>
-					</div>
-					<div class="list-group__count">
-						<strong>Количество</strong>
-					</div>
-					<div class="list-group__cost">
-						<strong>Стоимость</strong>
-					</div>
-					<div class="list-group__actions">
-						<strong>Действия</strong>
-					</div>
-				</li>
-				<TRComponent
-					v-for="row in getListTable"
-					:rows="row"
-					:key="row.id"
-				/>
-			</ul>
-		</div>
+			<table class="table">
+				<thead>
+					<tr>
+						<th><strong>#</strong></th>
+						<th><strong>Деталь</strong></th>
+						<th><strong>Цена</strong></th>
+						<th><strong>Количество</strong></th>
+						<th><strong>Стоимость</strong></th>
+						<th><strong>Действия</strong></th>
+					</tr>
+				</thead>
+				<tbody>
+				<TRComponent v-for="rows of getListTable" :rows="rows">
+				</TRComponent>
+				</tbody>
+			</table>
+  	</div>
   </div>
 </template>
 
 <script>
 import TRComponent from './components/TRComponent.vue'
+import VBtn from './components/VBtn'
 import { mapGetters } from 'vuex'
 export default {
   name: 'App',
   components: {
     TRComponent,
+    VBtn,
   },
 	computed: {
     ...mapGetters([
       'getListTable'
 		])
-	}
+	},
 }
 </script>

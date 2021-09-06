@@ -1,29 +1,18 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 Vue.use(Vuex)
+import { calculateCost } from '../util/index'
+import { getByIdRecursive } from '../util/index'
+import listTable from '../data/listTable.json'
 
-function calculateCost(list) {
-  return list.map( item => {
-    if(!Object.hasOwnProperty('cost')){
-      item.cost = item.price * item.count
-      item = {...item, ...item.cost}
-    }
-    for(let key in item) {
-      if(Array.isArray(item[key]) && item[key].length) {
-        calculateCost(item[key])
-        return item
-      }
-    }
-  })
-}
 export default new Vuex.Store({
   state: {
-    listTable: [
+  /*  listTable: [
       {
         id: 1,
         title: 'Кузов',
         price: 11_000,
-        count: 1,
+        count: 2,
         children: [
           {
             id: 11,
@@ -36,14 +25,44 @@ export default new Vuex.Store({
                 title: 'Замок',
                 price: 5_000,
                 count: 4,
-                children: null
+                children: [
+                  {
+                    id: 1111,
+                    title: 'Замок2',
+                    price: 5_000,
+                    count: 4,
+                    children: null
+                  },
+                  {
+                    id: 1112,
+                    title: 'Замок3',
+                    price: 5_000,
+                    count: 4,
+                    children: null
+                  },
+                ]
               },
               {
                 id: 112,
                 title: 'Ручки',
                 price: 6_000,
                 count: 6,
-                children: null
+                children: [
+                  {
+                    id: 1121,
+                    title: 'Ручки2',
+                    price: 3_000,
+                    count: 2,
+                    children: null
+                  },
+                  {
+                    id: 1122,
+                    title: 'Ручки3',
+                    price: 1_000,
+                    count: 3,
+                    children: null
+                  },
+                ]
               }
             ]
           }
@@ -71,7 +90,8 @@ export default new Vuex.Store({
           }
         ]
       }
-    ]
+    ]*/
+    listTable: listTable
   },
   getters: {
     getListTable(state) {
@@ -79,7 +99,20 @@ export default new Vuex.Store({
     }
   },
   mutations: {
+    remove(state, id) {
+      getByIdRecursive(state.listTable, id, -1)
+    },
+    add(state, id) {
+      getByIdRecursive(state.listTable, id, 1)
+    },
   },
   actions: {
+    removeAction({commit}, id){
+      commit('remove', id)
+    },
+    addAction(store, id){
+      store.commit('add', id)
+    }
   },
+
 })

@@ -17,29 +17,22 @@
 				</TRComponent>
 				</tbody>
 			</table>
-  	</div>
+		</div>
   </div>
 </template>
 
 <script>
 import TRComponent from './components/TRComponent.vue'
-import VBtn from './components/VBtn'
 import { mapGetters } from 'vuex'
 export default {
   name: 'App',
   components: {
     TRComponent,
-    VBtn,
   },
 	computed: {
     ...mapGetters([
       'getListTable'
 		])
-	},
-	methods: {
-    clickHandler() {
-      console.log('clickHandler')
-		}
 	}
 }
 </script>

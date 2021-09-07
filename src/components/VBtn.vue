@@ -1,5 +1,5 @@
 <template>
-	<button @click="$emit('handler')" :class="{[`btn btn-${this.color}` ||'']: this.color}">
+	<button @click="$emit('handler')" :class="classes">
 		<slot>{{ text }}</slot>
 	</button>
 </template>
@@ -8,13 +8,23 @@
 export default {
   name: "VBtn",
 	props: {
-    color: {
+    typeButton: {
       type: String,
 			required: false
+		},
+
+    colorText: {
+      type: String,
 		},
 		text: {
       type: String,
 		},
+	},
+	computed: {
+    classes(){
+      return `${this.typeButton ? `btn btn-${this.typeButton}`: ''
+      }${this.colorText ? ` text-${this.colorText}`: ''}`
+		}
 	}
 }
 </script>

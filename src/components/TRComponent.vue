@@ -35,7 +35,8 @@ export default {
     },
 			btnRemove = {
         props: {
-          color: 'danger'
+          typeButton: 'danger',
+					colorText: 'light'
 				},
         class: 'mr-1',
         on: {
@@ -43,7 +44,10 @@ export default {
         }
       },
       btnAdd ={
-        props: { color: 'primary' },
+        props: {
+          typeButton: 'primary',
+          colorText: 'light'
+				},
         on: {
           handler: ()=> this.addCount(this.rows.id)
         }

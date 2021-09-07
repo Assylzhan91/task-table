@@ -3,11 +3,10 @@ import VBtn from './VBtn'
 import { dotFormatNums } from '../util/index'
 import minus from '../assets/images/icons/minus-square-solid.svg'
 import plus from '../assets/images/icons/plus-square-solid.svg'
-import { mapActions } from 'vuex'
 export default {
   name: 'TRComponent',
 	data: ()=>({
-    open: false,
+    open: true,
 	}),
 	components: {
     VBtn
@@ -15,81 +14,75 @@ export default {
   props: {
     rows: {
       type: Object
-    },
-    remove: String,
-    add: String,
-    mrClass: String,
-    addClass: String,
-    removeClass: String,
-    classNames: String,
+    }
   },
 
   methods: {
-    ...mapActions([
-      'getDataAction'
-		]),
-    toggle: function (id) {
+    toggle() {
       this.open = !this.open;
 		},
-		removeCount(id){
+		removeCount(id) {
       this.$store.dispatch('removeAction', id)
 		},
-		addCount(id){
+		addCount(id) {
       this.$store.dispatch('addAction', id)
 		}
   },
+	emits: ['handler'],
   render(h) {
+    let imgProps = {
+      attrs: {src: this.open ? minus : plus}
+    },
+			btnRemove = {
+        props: {
+          color: 'danger'
+				},
+        class: 'mr-1',
+        on: {
+          handler: ()=>this.removeCount(this.rows.id)
+        }
+      },
+      btnAdd ={
+        props: { color: 'primary' },
+        on: {
+          handler: ()=> this.addCount(this.rows.id)
+        }
+      },
+			align = { staticClass: 'd-flex align-items-center' }
 
-    if(this.rows) {
-      return (
-        <tr>
-					<td colSpan="42" >
-						<table>
-							<tr>
-								<td class={'d-flex align-items-center'}>
-									<button class={'button'} onClick={()=>this.toggle(this.rows.id)}>
-                    {this.rows.children
-											? <img src={this.open ? minus : plus} alt="MINUS"/>
-											: null
-                    }
-									</button>
-									<strong>{dotFormatNums(this.rows.id)}</strong>
-                </td>
-								<td>{this.rows.title}</td>
-                <td>{this.rows.price}</td>
-								<td>{this.rows.count}</td>
-								<td>{this.rows.price * this.rows.count}</td>
-								<td>
-									<button
-										class={'btn btn-danger mr-1'}
-                    onClick={()=>this.removeCount(this.rows.id)}
-									> Удалить</button>
-									<button
-                      onClick={()=>this.addCount(this.rows.id)}
-										class={'btn btn-primary mr-1'}
-									>Добавить</button>
-                </td>
-							</tr>
-              {
-                this.rows.children
-								&& this.rows.children.map( rows => {
-                  if(this.open){
-                    return (
-                      <TRComponent rows={rows}/>
-                    )
-                  }
-								})
-              }
-						</table>
-					</td>
-				</tr>
-			)
-      /* {this.rows.children && this.rows.children.map( rows => <TRComponent rows={rows}/>) }*/
-    }else {
-      return (
-        <p>No letters</p>
-			)
-		}
+    return this.rows && h('tr', [
+      h('td', [
+        h('table', [
+					h('tr', [
+            h('td', align, [
+              h(VBtn, {
+                staticClass: 'button',
+								on:{
+									handler: this.toggle
+								}
+							}, [
+                this.rows.children ? h('img', imgProps) : '',
+              ]),
+              h('strong', dotFormatNums(this.rows.id)),
+						]),
+            	h('td', this.rows.title),
+            	h('td', this.rows.price),
+            	h('td', this.rows.count),
+            	h('td', this.rows.price * this.rows.count),
+            	h('td', [
+                h(VBtn, btnRemove, 'Удалить'),
+                h(VBtn, btnAdd, 'Добавить'),
+							]),
+          ]),
+          this.rows.children
+					&& this.rows.children.map(rows =>
+						this.open
+							? <TRComponent rows={rows} key={rows.id} />
+							: null
+					)
+				])
+			])
+		])
 	}
 }
 </script>

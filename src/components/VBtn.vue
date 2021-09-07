@@ -1,6 +1,6 @@
 <template>
-	<button @click="$emit('handler')" class="btn" :class="`btn-${color}`">
-		{{ text }}
+	<button @click="$emit('handler')" :class="{[`btn btn-${this.color}` ||'']: this.color}">
+		<slot>{{ text }}</slot>
 	</button>
 </template>
 
@@ -10,11 +10,10 @@ export default {
 	props: {
     color: {
       type: String,
-      default: 'warning'
+			required: false
 		},
 		text: {
       type: String,
-      default: 'Default'
 		},
 	}
 }

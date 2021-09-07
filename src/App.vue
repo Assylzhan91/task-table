@@ -13,7 +13,7 @@
 					</tr>
 				</thead>
 				<tbody>
-				<TRComponent v-for="rows of getListTable" :rows="rows">
+				<TRComponent v-for="rows of getListTable" :rows="rows" :key="rows.id">
 				</TRComponent>
 				</tbody>
 			</table>
@@ -36,5 +36,10 @@ export default {
       'getListTable'
 		])
 	},
+	methods: {
+    clickHandler() {
+      console.log('clickHandler')
+		}
+	}
 }
 </script>

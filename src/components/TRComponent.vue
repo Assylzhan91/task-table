@@ -61,7 +61,7 @@ export default {
 									handler: this.toggle
 								}
 							}, [
-                this.rows.children ? h('img', imgProps) : '',
+                h(this.rows.children ?  'img': '', imgProps),
               ]),
               h('strong', dotFormatNums(this.rows.id)),
 						]),
@@ -76,7 +76,7 @@ export default {
           ]),
           this.rows.children
 					&& this.rows.children.map(rows =>
-						this.open
+							this.open
 							? <TRComponent rows={rows} key={rows.id} />
 							: null
 					)

@@ -6,7 +6,7 @@ import plus from '../assets/images/icons/plus-square-solid.svg'
 export default {
   name: 'TRComponent',
 	data: ()=>({
-    open: true,
+    open: false,
 	}),
 	components: {
     VBtn

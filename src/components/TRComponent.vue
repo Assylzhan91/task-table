@@ -17,6 +17,7 @@ export default {
 
   methods: {
     toggle(id) {
+      this.$forceUpdate()
       this.$store.dispatch('toggleAction', id)
 		},
 		removeCount(id) {
@@ -70,7 +71,7 @@ export default {
             	h('td', this.rows.title),
             	h('td', this.rows.price),
             	h('td', this.rows.count),
-            	h('td', this.rows.cost),
+            	h('td', this.rows.count * this.rows.price),
             	h('td', [
                 h(VBtn, btnRemove, 'Удалить'),
                 h(VBtn, btnAdd, 'Добавить'),

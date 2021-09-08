@@ -6,7 +6,7 @@ import plus from '../assets/images/icons/plus-square-solid.svg'
 export default {
   name: 'TRComponent',
 	data: ()=>({
-    open: false,
+    open: true,
 	}),
 	components: {
     VBtn
@@ -72,7 +72,7 @@ export default {
             	h('td', this.rows.title),
             	h('td', this.rows.price),
             	h('td', this.rows.count),
-            	h('td', this.rows.price * this.rows.count),
+            	h('td', this.rows.cost),
             	h('td', [
                 h(VBtn, btnRemove, 'Удалить'),
                 h(VBtn, btnAdd, 'Добавить'),

@@ -20,11 +20,16 @@ export function calculateCost(list) {
 export function getByIdRecursive(listTable, id, plusMinus) {
   return listTable.map( item => {
     if(item.id === id) {
-      if(item.count <= 0 && plusMinus < 0){
-        item.count = 0
+      if(!!plusMinus) {
+        if(item.count <= 0 && plusMinus < 0){
+          item.count = 0
+        } else {
+          item.count = item.count + plusMinus
+        }
       } else {
-        item.count = item.count + plusMinus
+        item.isOpen = !item.isOpen
       }
+
     } else if (Array.isArray(item.children) && item.children.length) {
       getByIdRecursive(item.children, id, plusMinus)
     }

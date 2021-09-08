@@ -21,6 +21,9 @@ export default new Vuex.Store({
     add(state, id) {
       getByIdRecursive(state.listTable, id, 1)
     },
+    toggle(state, id) {
+      getByIdRecursive(state.listTable, id)
+    },
   },
   actions: {
     removeAction({commit}, id){
@@ -28,6 +31,9 @@ export default new Vuex.Store({
     },
     addAction(store, id){
       store.commit('add', id)
+    },
+    toggleAction({commit}, id){
+      commit('toggle', id)
     }
   },
 

@@ -3,11 +3,9 @@ import VBtn from './VBtn'
 import { dotFormatNums } from '../util/index'
 import minus from '../assets/images/icons/minus-square-solid.svg'
 import plus from '../assets/images/icons/plus-square-solid.svg'
+
 export default {
   name: 'TRComponent',
-	data: ()=>({
-    open: true,
-	}),
 	components: {
     VBtn
   },
@@ -18,8 +16,8 @@ export default {
   },
 
   methods: {
-    toggle() {
-      this.open = !this.open;
+    toggle(id) {
+      this.$store.dispatch('toggleAction', id)
 		},
 		removeCount(id) {
       this.$store.dispatch('removeAction', id)
@@ -31,7 +29,7 @@ export default {
 	emits: ['handler'],
   render(h) {
     let imgProps = {
-      attrs: {src: this.open ? minus : plus}
+      attrs: {src: this.rows.isOpen ? minus : plus}
     },
 			btnRemove = {
         props: {
@@ -62,7 +60,7 @@ export default {
               h(VBtn, {
                 staticClass: 'button',
 								on:{
-									handler: this.toggle
+									handler: () => this.toggle (this.rows.id)
 								}
 							}, [
                 h(this.rows.children ?  'img': '', imgProps),
@@ -80,7 +78,7 @@ export default {
           ]),
           this.rows.children
 					&& this.rows.children.map(rows =>
-							this.open
+            this.rows.isOpen
 							? <TRComponent rows={rows} key={rows.id} />
 							: null
 					)

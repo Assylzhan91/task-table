@@ -3,10 +3,9 @@ export function dotFormatNums(number){
 }
 
 export function calculateCost(list) {
-  return list.map( item => {
-      item.cost = item.price * item.count
-      item = { ...item, ...item.cost }
-
+  return list.map( (item) => {
+    Object.assign(item, {cost: item.price * item.count})
+    Object.assign(item, {isOpen: false})
     for (let key in item) {
       if(Array.isArray(item[key]) && item[key].length) {
         calculateCost(item[key])

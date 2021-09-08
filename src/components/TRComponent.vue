@@ -17,6 +17,7 @@ export default {
 
   methods: {
     toggle(id) {
+      this.$forceUpdate()
       this.$store.dispatch('toggleAction', id)
 		},
 		removeCount(id) {

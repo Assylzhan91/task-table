@@ -7,7 +7,7 @@ import listTable from '../data/listTable.json'
 
 export default new Vuex.Store({
   state: {
-    listTable: listTable
+    listTable
   },
   getters: {
     getListTable(state) {

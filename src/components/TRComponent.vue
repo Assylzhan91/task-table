@@ -10,7 +10,7 @@
 						>
 							<img
 								v-if="rows.children"
-								:src="`images/icons/${this.rows.isOpen?'minus':'plus'}-square-solid.svg`"
+								:src="setImageIcon"
 							>
 						</VBtn>
 						<strong>{{ getDotFormatNums }}</strong>
@@ -18,7 +18,7 @@
 					<td>{{ rows.title }}</td>
 					<td>{{ rows.price }}</td>
 					<td>{{ rows.count }}</td>
-					<td>{{ rows.count * rows.price }}</td>
+					<td>{{ countMultiplePrice }}</td>
 					<td>
 						<VBtn
 							class='mr-1'
@@ -58,6 +58,12 @@ export default {
 		getDotFormatNums () {
 			return dotFormatNums(this.rows.id)
 		},
+		setImageIcon(){
+      return `${this.rows.isOpen?'minus':'plus'}-square-solid.svg`
+		},
+    countMultiplePrice (){
+			return this.rows.count * this.rows.price
+    },
 	},
   methods: {
     toggle(id) {

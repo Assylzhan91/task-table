@@ -23,8 +23,8 @@ export function getByIdRecursive(listTable, id, plusMinus) {
         } else {
           item.count += plusMinus
         }
-      } else {
-        if(item.isOpen) Vue.set(item, 'isOpen', null)
+      } else   {
+        if(item.isOpen) Vue.set(item, 'isOpen', false)
         else Vue.set(item, 'isOpen', true)
       }
 
